@@ -617,12 +617,21 @@
 				// If class
 				if(stripos($A, 'ic_class_wh24_box') !== false)
 				{
+					$doc = new DOMDocument();
+					$doc->loadHTML(html_entity_decode($Array[$i]));
+					$icon   = '';
+					foreach( $doc->getElementsByTagName('img') as $tag ) {
+						$icon = $tag->getAttribute('src');
+						break;
+					}
+                                        
 					$Class 	= trim(strip_tags(html_entity_decode($Array[$i])));
 					$Level 	= trim(strip_tags(html_entity_decode($Array[$i + 1])));
 					$EXP 	= trim(strip_tags(html_entity_decode($Array[$i + 2])));
 					if ($Class)
 					{
 						$arr = array(
+							'icon'  => $icon,
 							'class' => $Class,
 							'level' => $Level,
 							'exp'	=> array(
